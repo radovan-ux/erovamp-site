@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erovoutika Admin CMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00008b;
+            --primary-hover: #0000c8;
+            --bg: #f4f7f6;
+            --surface: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #6c757d;
+            --border: #e0e0e0;
+            --danger: #dc3545;
+            --success: #28a745;
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); }
+
+        /* --- Auth Screen --- */
+        #auth-screen {
+            display: flex; height: 100vh; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #ffffff 0%, #e8e8f8 100%);
+        }
+        .login-card {
+            background: var(--surface); padding: 3rem; border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0,0,139,0.1); text-align: center; width: 400px;
+        }
+        .login-card h2 { color: var(--primary); margin-bottom: 0.5rem; }
+        .login-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 10px 20px;
+            border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: 0.2s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+        }
+        .btn:hover { background: var(--primary-hover); }
+
+        /* --- Admin Layout --- */
+        #admin-screen { display: none; min-height: 100vh; flex-direction: column; }
+        .navbar {
+            background: var(--surface); padding: 1rem 2rem; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .navbar h1 { color: var(--primary); font-size: 1.2rem; }
+        .logout-btn { background: transparent; color: var(--text-muted); border: 1px solid var(--border); width: auto; }
+        .logout-btn:hover { border-color: var(--danger); color: var(--danger); background: transparent; }
+
+        .container { display: flex; flex: 1; }
+        .sidebar {
+            width: 250px; background: var(--surface); border-right: 1px solid var(--border); padding: 2rem 1rem;
+        }
+        .nav-item {
+            padding: 12px 16px; margin-bottom: 8px; border-radius: var(--radius); cursor: pointer;
+            color: var(--text-muted); font-weight: 600; transition: 0.2s;
+        }
+        .nav-item.active, .nav-item:hover { background: rgba(0,0,139,0.05); color: var(--primary); }
+
+        .main-content { padding: 2rem; flex: 1; overflow-y: auto; }
+        .card { background: var(--surface); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border); margin-bottom: 2rem; }
+        .card h3 { margin-bottom: 1.5rem; color: var(--primary); border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; }
+
+        /* --- Forms --- */
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+        input[type="text"], textarea {
+            width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px;
+            font-family: 'Poppins', sans-serif; transition: 0.2s;
+        }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; }
+        textarea { resize: vertical; min-height: 100px; }
+        
+        .image-preview-wrapper { margin-top: 10px; text-align: center; border: 1px dashed var(--border); padding: 10px; border-radius: 4px; }
+        #image-preview { max-width: 100%; max-height: 200px; display: none; border-radius: 4px; }
+
+        /* --- Toast --- */
+        #toast {
+            position: fixed; bottom: 20px; right: 20px; background: var(--success); color: white;
+            padding: 12px 24px; border-radius: var(--radius); transform: translateY(100px);
+            opacity: 0; transition: 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        #toast.show { transform: translateY(0); opacity: 1; }
+        #toast.error { background: var(--danger); }
+    </style>
+</head>
+<body>
+
+    <div id="auth-screen">
+        <div class="login-card">
+            <h2>EROVOUTIKA CMS</h2>
+            <p>Authorized personnel only</p>
+            <button id="login-btn" class="btn">Sign in with Google</button>
+            <p id="login-error" style="color: var(--danger); margin-top: 1rem; display: none;"></p>
+        </div>
+    </div>
+
+    <div id="admin-screen">
+        <nav class="navbar">
+            <h1>EROVOUTIKA ADMIN</h1>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span id="user-email" style="font-size: 0.9rem; color: var(--text-muted);"></span>
+                <button id="logout-btn" class="btn logout-btn">Logout</button>
+            </div>
+        </nav>
+        <div class="container">
+            <aside class="sidebar">
+                <div class="nav-item active">About Us</div>
+                <div class="nav-item" style="opacity: 0.5; cursor: not-allowed;">Services (Locked)</div>
+                <div class="nav-item" style="opacity: 0.5; cursor: not-allowed;">Portfolio (Locked)</div>
+            </aside>
+            <main class="main-content">
+                <div class="card">
+                    <h3>Edit "Who We Are" Section</h3>
+                    <div class="form-group">
+                        <label>Headline</label>
+                        <input type="text" id="about-headline" placeholder="e.g. Respected. Experienced. Innovative.">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="about-desc" placeholder="Write the company description here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Section Image</label>
+                        <input type="file" id="about-image-file" accept="image/*">
+                        <div class="image-preview-wrapper">
+                            <span id="image-placeholder" style="color: var(--text-muted); font-size: 0.8rem;">No image uploaded yet</span>
+                            <img id="image-preview" src="" alt="Preview">
+                        </div>
+                    </div>
+                    <button id="save-about-btn" class="btn" style="width: auto;">Save Changes</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="toast">Saved Successfully!</div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+        // 1. Paste your Firebase Config here
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const AUTHORIZED_EMAIL = "your-admin@gmail.com"; // CHANGE THIS to your email
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+        const provider = new GoogleAuthProvider();
+
+        // UI Elements
+        const authScreen = document.getElementById('auth-screen');
+        const adminScreen = document.getElementById('admin-screen');
+        const loginError = document.getElementById('login-error');
+        const imagePreview = document.getElementById('image-preview');
+        const imagePlaceholder = document.getElementById('image-placeholder');
+
+        // --- AUTHENTICATION ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                if (user.email.toLowerCase() === AUTHORIZED_EMAIL.toLowerCase()) {
+                    authScreen.style.display = 'none';
+                    adminScreen.style.display = 'flex';
+                    document.getElementById('user-email').textContent = user.email;
+                    loadAboutData();
+                } else {
+                    await signOut(auth);
+                    loginError.textContent = "Unauthorized email address.";
+                    loginError.style.display = 'block';
+                }
+            } else {
+                authScreen.style.display = 'flex';
+                adminScreen.style.display = 'none';
+            }
+        });
+
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            try { await signInWithPopup(auth, provider); } 
+            catch (error) { console.error("Login failed", error); }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
+
+        // --- CRUD OPERATIONS ---
+        let currentImageUrl = "";
+
+        async function loadAboutData() {
+            const snap = await getDoc(doc(db, 'sections', 'about'));
+            if (snap.exists()) {
+                const data = snap.data();
+                document.getElementById('about-headline').value = data.headline || "";
+                document.getElementById('about-desc').value = data.description || "";
+                if (data.imageUrl) {
+                    currentImageUrl = data.imageUrl;
+                    imagePreview.src = data.imageUrl;
+                    imagePreview.style.display = 'block';
+                    imagePlaceholder.style.display = 'none';
+                }
+            }
+        }
+
+        document.getElementById('save-about-btn').addEventListener('click', async (e) => {
+            const btn = e.target;
+            const headline = document.getElementById('about-headline').value.trim();
+            const description = document.getElementById('about-desc').value.trim();
+            const fileInput = document.getElementById('about-image-file');
+            
+            if (!headline || !description) return showToast("Headline and Description cannot be empty", true);
+
+            btn.textContent = "Saving...";
+            btn.disabled = true;
+
+            try {
+                let finalImageUrl = currentImageUrl;
+
+                // Handle Image Upload if a new file is selected
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const storageRef = ref(storage, `about/${Date.now()}_${file.name}`);
+                    const uploadTask = await uploadBytesResumable(storageRef, file);
+                    finalImageUrl = await getDownloadURL(uploadTask.ref);
+                }
+
+                // Save to Firestore
+                await setDoc(doc(db, 'sections', 'about'), {
+                    headline: headline,
+                    description: description,
+                    imageUrl: finalImageUrl
+                });
+
+                showToast("About section updated successfully!");
+                loadAboutData(); // Refresh UI
+            } catch (error) {
+                console.error("Save error", error);
+                showToast("Error saving data", true);
+            } finally {
+                btn.textContent = "Save Changes";
+                btn.disabled = false;
+                fileInput.value = ""; // Reset file input
+            }
+        });
+
+        // --- UTILS ---
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = isError ? "error show" : "show";
+            setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
+        }
+    </script>
+</body>
+</html>
