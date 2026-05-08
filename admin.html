@@ -3,85 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erovoutika Admin CMS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Erovoutika — Admin CMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Modern Light Tech Theme matching DESIGN_Light Mode */
         :root {
             --primary: #00008b;
             --primary-hover: #0000c8;
-            --bg: #f4f7f6;
+            --bg: #f5f5fc;
             --surface: #ffffff;
-            --text-main: #1a1a1a;
-            --text-muted: #6c757d;
-            --border: #e0e0e0;
-            --danger: #dc3545;
+            --text-main: #151b29;
+            --text-muted: #767684;
+            --border: #dde2f6;
+            --danger: #ba1a1a;
             --success: #28a745;
             --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 76, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg); color: var(--text-main); }
 
-        /* --- Auth Screen --- */
+        /* Auth State */
         #auth-screen {
             display: flex; height: 100vh; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #ffffff 0%, #e8e8f8 100%);
+            background: radial-gradient(circle at center, #ffffff 0%, #e9edff 100%);
         }
         .login-card {
-            background: var(--surface); padding: 3rem; border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(0,0,139,0.1); text-align: center; width: 400px;
+            background: var(--surface); padding: 3.5rem 2.5rem; border-radius: var(--radius);
+            box-shadow: 0 10px 40px rgba(0, 0, 76, 0.08); text-align: center; width: 420px;
+            border: 1px solid var(--border);
         }
-        .login-card h2 { color: var(--primary); margin-bottom: 0.5rem; }
-        .login-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+        .login-card h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+        .login-card p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 0.9rem; }
+        
         .btn {
-            background: var(--primary); color: white; border: none; padding: 10px 20px;
-            border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: 0.2s;
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+            background: var(--primary); color: white; border: none; padding: 12px 24px;
+            border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: all 0.2s ease;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
         }
-        .btn:hover { background: var(--primary-hover); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .btn:disabled { background: var(--text-muted); cursor: not-allowed; transform: none; }
 
-        /* --- Admin Layout --- */
+        /* Dashboard Interface Layout */
         #admin-screen { display: none; min-height: 100vh; flex-direction: column; }
         .navbar {
-            background: var(--surface); padding: 1rem 2rem; border-bottom: 1px solid var(--border);
+            background: var(--surface); padding: 1rem 2.5rem; border-bottom: 1px solid var(--border);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .navbar h1 { color: var(--primary); font-size: 1.2rem; }
+        .navbar h1 { color: var(--primary); font-size: 1.3rem; font-weight: 700; }
         .logout-btn { background: transparent; color: var(--text-muted); border: 1px solid var(--border); width: auto; }
-        .logout-btn:hover { border-color: var(--danger); color: var(--danger); background: transparent; }
+        .logout-btn:hover { border-color: var(--danger); color: var(--danger); background: transparent; transform: none; }
 
         .container { display: flex; flex: 1; }
         .sidebar {
-            width: 250px; background: var(--surface); border-right: 1px solid var(--border); padding: 2rem 1rem;
+            width: 260px; background: var(--surface); border-right: 1px solid var(--border); padding: 2.5rem 1rem;
         }
         .nav-item {
-            padding: 12px 16px; margin-bottom: 8px; border-radius: var(--radius); cursor: pointer;
-            color: var(--text-muted); font-weight: 600; transition: 0.2s;
+            padding: 12px 18px; margin-bottom: 10px; border-radius: var(--radius); cursor: pointer;
+            color: var(--text-muted); font-weight: 600; transition: all 0.2s ease;
         }
-        .nav-item.active, .nav-item:hover { background: rgba(0,0,139,0.05); color: var(--primary); }
+        .nav-item.active, .nav-item:hover { background: var(--border); color: var(--primary); }
 
-        .main-content { padding: 2rem; flex: 1; overflow-y: auto; }
-        .card { background: var(--surface); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border); margin-bottom: 2rem; }
-        .card h3 { margin-bottom: 1.5rem; color: var(--primary); border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; }
+        .main-content { padding: 3rem; flex: 1; overflow-y: auto; }
+        .card { 
+            background: var(--surface); border-radius: var(--radius); padding: 2.5rem; 
+            border: 1px solid var(--border); box-shadow: var(--shadow); max-width: 800px;
+        }
+        .card h3 { margin-bottom: 2rem; color: var(--primary); font-size: 1.4rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
 
-        /* --- Forms --- */
-        .form-group { margin-bottom: 1.5rem; }
-        label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+        /* Inputs & Editors */
+        .form-group { margin-bottom: 1.75rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         input[type="text"], textarea {
-            width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px;
-            font-family: 'Poppins', sans-serif; transition: 0.2s;
+            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius);
+            font-size: 0.95rem; background: #faf9ff; transition: all 0.2s ease;
         }
-        input:focus, textarea:focus { border-color: var(--primary); outline: none; }
-        textarea { resize: vertical; min-height: 100px; }
+        input:focus, textarea:focus { border-color: var(--primary); background: var(--surface); outline: none; box-shadow: 0 0 0 3px rgba(0,0,139,0.1); }
+        textarea { resize: vertical; min-height: 140px; }
         
-        .image-preview-wrapper { margin-top: 10px; text-align: center; border: 1px dashed var(--border); padding: 10px; border-radius: 4px; }
-        #image-preview { max-width: 100%; max-height: 200px; display: none; border-radius: 4px; }
+        .image-preview-wrapper { 
+            margin-top: 12px; text-align: center; border: 2px dashed var(--border); 
+            padding: 20px; border-radius: var(--radius); background: #faf9ff;
+        }
+        #image-preview { max-width: 100%; max-height: 220px; display: none; border-radius: var(--radius); box-shadow: var(--shadow); }
 
-        /* --- Toast --- */
+        /* Custom Popup Notifications */
         #toast {
-            position: fixed; bottom: 20px; right: 20px; background: var(--success); color: white;
-            padding: 12px 24px; border-radius: var(--radius); transform: translateY(100px);
-            opacity: 0; transition: 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: fixed; bottom: 30px; right: 30px; background: var(--success); color: white;
+            padding: 14px 28px; border-radius: var(--radius); transform: translateY(150px);
+            opacity: 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); font-weight: 500; z-index: 1000;
         }
         #toast.show { transform: translateY(0); opacity: 1; }
         #toast.error { background: var(--danger); }
@@ -92,70 +104,65 @@
     <div id="auth-screen">
         <div class="login-card">
             <h2>EROVOUTIKA CMS</h2>
-            <p>Authorized personnel only</p>
+            <p>Access Portal for Site Administration</p>
             <button id="login-btn" class="btn">Sign in with Google</button>
-            <p id="login-error" style="color: var(--danger); margin-top: 1rem; display: none;"></p>
+            <p id="login-error" style="color: var(--danger); margin-top: 1.5rem; display: none; font-size: 0.85rem; font-weight: 500;"></p>
         </div>
     </div>
 
     <div id="admin-screen">
         <nav class="navbar">
-            <h1>EROVOUTIKA ADMIN</h1>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <span id="user-email" style="font-size: 0.9rem; color: var(--text-muted);"></span>
+            <h1>EROVOUTIKA CONSOLE</h1>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <span id="user-email" style="font-size: 0.85rem; font-weight: 500; color: var(--text-muted);"></span>
                 <button id="logout-btn" class="btn logout-btn">Logout</button>
             </div>
         </nav>
         <div class="container">
             <aside class="sidebar">
                 <div class="nav-item active">About Us</div>
-                <div class="nav-item" style="opacity: 0.5; cursor: not-allowed;">Services (Locked)</div>
-                <div class="nav-item" style="opacity: 0.5; cursor: not-allowed;">Portfolio (Locked)</div>
+                <div class="nav-item" style="opacity: 0.4; cursor: not-allowed;">Services (Locked)</div>
+                <div class="nav-item" style="opacity: 0.4; cursor: not-allowed;">Portfolio (Locked)</div>
             </aside>
             <main class="main-content">
                 <div class="card">
-                    <h3>Edit "Who We Are" Section</h3>
+                    <h3>About Us Configuration</h3>
+                    
                     <div class="form-group">
-                        <label>Headline</label>
-                        <input type="text" id="about-headline" placeholder="e.g. Respected. Experienced. Innovative.">
+                        <label>Main Headline</label>
+                        <input type="text" id="about-headline" placeholder="e.g., Respected. Experienced. Innovative.">
                     </div>
+
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="about-desc" placeholder="Write the company description here..."></textarea>
+                        <label>Who We Are (Description)</label>
+                        <textarea id="about-desc" placeholder="Write company bio or operational description..."></textarea>
                     </div>
+
                     <div class="form-group">
-                        <label>Section Image</label>
+                        <label>Featured Image</label>
                         <input type="file" id="about-image-file" accept="image/*">
                         <div class="image-preview-wrapper">
-                            <span id="image-placeholder" style="color: var(--text-muted); font-size: 0.8rem;">No image uploaded yet</span>
-                            <img id="image-preview" src="" alt="Preview">
+                            <span id="image-placeholder" style="color: var(--text-muted); font-size: 0.85rem;">No uploaded image present</span>
+                            <img id="image-preview" src="" alt="Live Preview">
                         </div>
                     </div>
-                    <button id="save-about-btn" class="btn" style="width: auto;">Save Changes</button>
+
+                    <button id="save-about-btn" class="btn" style="width: auto;">Publish Changes</button>
                 </div>
             </main>
         </div>
     </div>
 
-    <div id="toast">Saved Successfully!</div>
+    <div id="toast">Data successfully published!</div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
-        // 1. Paste your Firebase Config here
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        const AUTHORIZED_EMAIL = "your-admin@gmail.com"; // CHANGE THIS to your email
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-storage.js";
+        
+        // Import credentials from your config file
+        import { firebaseConfig, ADMIN_EMAIL } from "./firebase-config.js";
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -163,24 +170,25 @@
         const storage = getStorage(app);
         const provider = new GoogleAuthProvider();
 
-        // UI Elements
         const authScreen = document.getElementById('auth-screen');
         const adminScreen = document.getElementById('admin-screen');
         const loginError = document.getElementById('login-error');
         const imagePreview = document.getElementById('image-preview');
         const imagePlaceholder = document.getElementById('image-placeholder');
 
-        // --- AUTHENTICATION ---
+        let currentImageUrl = "";
+
+        // --- SECURITY & AUTHORIZATION ROUTE GUARD ---
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                if (user.email.toLowerCase() === AUTHORIZED_EMAIL.toLowerCase()) {
+                if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     authScreen.style.display = 'none';
                     adminScreen.style.display = 'flex';
                     document.getElementById('user-email').textContent = user.email;
                     loadAboutData();
                 } else {
                     await signOut(auth);
-                    loginError.textContent = "Unauthorized email address.";
+                    loginError.textContent = `Access Denied: ${user.email} is not registered as an administrator.`;
                     loginError.style.display = 'block';
                 }
             } else {
@@ -190,45 +198,53 @@
         });
 
         document.getElementById('login-btn').addEventListener('click', async () => {
-            try { await signInWithPopup(auth, provider); } 
-            catch (error) { console.error("Login failed", error); }
+            try { 
+                await signInWithPopup(auth, provider); 
+            } catch (error) { 
+                console.error("Authentication Error:", error); 
+            }
         });
 
         document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
 
-        // --- CRUD OPERATIONS ---
-        let currentImageUrl = "";
-
+        // --- RETRIEVE CURRENT SITE DATA ---
         async function loadAboutData() {
-            const snap = await getDoc(doc(db, 'sections', 'about'));
-            if (snap.exists()) {
-                const data = snap.data();
-                document.getElementById('about-headline').value = data.headline || "";
-                document.getElementById('about-desc').value = data.description || "";
-                if (data.imageUrl) {
-                    currentImageUrl = data.imageUrl;
-                    imagePreview.src = data.imageUrl;
-                    imagePreview.style.display = 'block';
-                    imagePlaceholder.style.display = 'none';
+            try {
+                const snap = await getDoc(doc(db, 'sections', 'about'));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    document.getElementById('about-headline').value = data.headline || "";
+                    document.getElementById('about-desc').value = data.description || "";
+                    if (data.imageUrl) {
+                        currentImageUrl = data.imageUrl;
+                        imagePreview.src = data.imageUrl;
+                        imagePreview.style.display = 'block';
+                        imagePlaceholder.style.display = 'none';
+                    }
                 }
+            } catch (error) {
+                showToast("Failed to fetch database content", true);
             }
         }
 
+        // --- UPDATE DATA & SAVE FILE TO STORAGE ---
         document.getElementById('save-about-btn').addEventListener('click', async (e) => {
             const btn = e.target;
             const headline = document.getElementById('about-headline').value.trim();
             const description = document.getElementById('about-desc').value.trim();
             const fileInput = document.getElementById('about-image-file');
             
-            if (!headline || !description) return showToast("Headline and Description cannot be empty", true);
+            if (!headline || !description) {
+                return showToast("Please completely fill out all text areas.", true);
+            }
 
-            btn.textContent = "Saving...";
+            btn.textContent = "Publishing to Live Site...";
             btn.disabled = true;
 
             try {
                 let finalImageUrl = currentImageUrl;
 
-                // Handle Image Upload if a new file is selected
+                // Process file if user selected a new file
                 if (fileInput.files.length > 0) {
                     const file = fileInput.files[0];
                     const storageRef = ref(storage, `about/${Date.now()}_${file.name}`);
@@ -236,31 +252,31 @@
                     finalImageUrl = await getDownloadURL(uploadTask.ref);
                 }
 
-                // Save to Firestore
+                // Write directly to your Firestore Cloud Database
                 await setDoc(doc(db, 'sections', 'about'), {
                     headline: headline,
                     description: description,
                     imageUrl: finalImageUrl
                 });
 
-                showToast("About section updated successfully!");
-                loadAboutData(); // Refresh UI
+                showToast("Successfully published updates live!");
+                loadAboutData();
             } catch (error) {
-                console.error("Save error", error);
-                showToast("Error saving data", true);
+                console.error("Database Write Error:", error);
+                showToast("System error: Could not publish updates.", true);
             } finally {
-                btn.textContent = "Save Changes";
+                btn.textContent = "Publish Changes";
                 btn.disabled = false;
-                fileInput.value = ""; // Reset file input
+                fileInput.value = ""; // Reset HTML5 file system selection
             }
         });
 
-        // --- UTILS ---
+        // --- UTILITY SYSTEMS ---
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.className = isError ? "error show" : "show";
-            setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
+            setTimeout(() => toast.className = toast.className.replace("show", ""), 4000);
         }
     </script>
 </body>
