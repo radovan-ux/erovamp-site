@@ -1238,8 +1238,12 @@
         measurementId: "G-KKEP1LKF0Z"
     };
 
-    // ⚠️ CHANGE THIS to the authorized admin email
-    const ADMIN_EMAIL = "admin@erovoutika.com";
+    // ⚠️ Authorized Admin Emails
+    const ALLOWED_EMAILS = [
+        "ngbradovan@gmail.com",
+        "khatall2026@gmail.com",
+        "erovoutika@gmail.com"
+    ];
 
     // ── LIVE SITE URL ──────────────────────
     const LIVE_SITE_URL = "index4_1_.html";
@@ -1300,7 +1304,7 @@
     // ── AUTH GUARD ────────────────────────
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+            if (ALLOWED_EMAILS.includes(user.email.toLowerCase())) {
                 authScreen.style.display = 'none';
                 adminScreen.style.display = 'block';
                 document.getElementById('user-email').textContent = user.email;
