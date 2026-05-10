@@ -390,28 +390,12 @@
         .nav-item:hover { background: var(--surface2); color: var(--text); }
         .nav-item.active { background: var(--primary-ghost); color: var(--primary); font-weight: 600; }
 
-        .nav-item.locked {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .nav-item.locked:hover { background: transparent; color: var(--text-sub); }
-
         .nav-icon {
             width: 18px;
             opacity: 0.7;
             flex-shrink: 0;
         }
         .nav-item.active .nav-icon { opacity: 1; }
-
-        .lock-badge {
-            margin-left: auto;
-            font-size: 0.65rem;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
 
         .sidebar-divider {
             height: 1px;
@@ -484,6 +468,7 @@
         /* FORM ELEMENTS */
         .form-group { margin-bottom: 1.25rem; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
 
         label {
             display: block;
@@ -640,9 +625,7 @@
         .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--primary); margin: 4px 0; }
         .stat-desc { font-size: 0.78rem; color: var(--text-muted); }
 
-        .tutorial-steps {
-            counter-reset: step;
-        }
+        .tutorial-steps { counter-reset: step; }
         .tutorial-step {
             display: flex;
             gap: 1.25rem;
@@ -652,9 +635,7 @@
         .tutorial-step:not(:last-child)::after {
             content: '';
             position: absolute;
-            left: 19px;
-            top: 44px;
-            bottom: -16px;
+            left: 19px; top: 44px; bottom: -16px;
             width: 2px;
             background: var(--border);
         }
@@ -667,34 +648,17 @@
             display: flex; align-items: center; justify-content: center;
             color: var(--primary);
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            position: relative;
-            z-index: 1;
+            font-weight: 700; font-size: 0.9rem;
+            flex-shrink: 0; position: relative; z-index: 1;
         }
-        .step-content h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-        .step-content p {
-            font-size: 0.83rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
+        .step-content h4 { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .step-content p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
         .step-content .step-tag {
             display: inline-block;
-            background: var(--accent-soft);
-            color: var(--accent);
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-top: 6px;
+            background: var(--accent-soft); color: var(--accent);
+            font-size: 0.7rem; font-weight: 600;
+            padding: 2px 8px; border-radius: 4px; margin-top: 6px;
         }
-        [data-theme="dark"] .step-content .step-tag { color: var(--primary-light); background: var(--primary-ghost); }
 
         /* QUICK LINKS */
         .quick-links {
@@ -703,98 +667,158 @@
             gap: 1rem;
         }
         .quick-link-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            display: flex; align-items: center; gap: 12px;
             padding: 1rem 1.25rem;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            cursor: pointer;
+            background: var(--surface2); border: 1px solid var(--border);
+            border-radius: var(--radius); cursor: pointer;
             transition: all var(--transition);
-            text-decoration: none;
-            color: var(--text);
+            text-decoration: none; color: var(--text);
         }
         .quick-link-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-ghost); transform: translateY(-2px); }
-        .ql-icon {
-            width: 36px; height: 36px;
-            border-radius: var(--radius-sm);
-            background: var(--primary-ghost);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1rem;
-        }
+        .ql-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--primary-ghost); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
         .ql-text strong { display: block; font-size: 0.85rem; font-weight: 600; }
         .ql-text span { font-size: 0.75rem; color: var(--text-muted); }
-
-        /* ═══════════════════════════════════════
-           CONTENT SECTION LISTING
-        ═══════════════════════════════════════ */
-        .content-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem 1.25rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 0.75rem;
-            background: var(--surface);
-            transition: all var(--transition);
-            gap: 1rem;
-            cursor: pointer;
-        }
-        .content-item:hover { border-color: var(--primary); background: var(--primary-ghost); }
-        .content-item.locked { opacity: 0.5; cursor: not-allowed; }
-        .content-item.locked:hover { border-color: var(--border); background: var(--surface); }
-        .ci-icon {
-            width: 40px; height: 40px;
-            border-radius: var(--radius-sm);
-            background: var(--surface2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        .ci-name { font-weight: 600; font-size: 0.9rem; }
-        .ci-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
-        .ci-arrow { margin-left: auto; color: var(--text-muted); font-size: 1.1rem; }
 
         /* ═══════════════════════════════════════
            ABOUT EDITOR SPECIFICS
         ═══════════════════════════════════════ */
         .preview-resize-demo {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            margin-top: 0.75rem;
-            text-align: center;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem; margin-top: 0.75rem;
+            text-align: center; min-height: 80px;
+            display: flex; align-items: center; justify-content: center;
         }
         .preview-resize-demo img {
-            border-radius: var(--radius-sm);
-            display: none;
-            box-shadow: var(--shadow);
-            object-fit: contain;
+            border-radius: var(--radius-sm); display: none;
+            box-shadow: var(--shadow); object-fit: contain;
         }
 
-        .fit-options {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+        .fit-options { display: flex; gap: 8px; flex-wrap: wrap; }
         .fit-opt {
-            padding: 6px 14px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-sub);
-            background: var(--surface);
+            padding: 6px 14px; border: 1px solid var(--border);
+            border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 600;
+            cursor: pointer; color: var(--text-sub); background: var(--surface);
             transition: all var(--transition);
         }
         .fit-opt.active, .fit-opt:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-ghost); }
+
+        /* ═══════════════════════════════════════
+           ITEM LIST (Services, Portfolio, etc.)
+        ═══════════════════════════════════════ */
+        .item-list { margin-bottom: 1rem; }
+
+        .item-row {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: border-color var(--transition);
+        }
+        .item-row:hover { border-color: var(--primary); }
+
+        .item-row-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+        .item-row-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+        .item-row-actions { display: flex; gap: 6px; }
+
+        /* Thumbnail in item row */
+        .item-thumb {
+            width: 60px; height: 60px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            border: 1px solid var(--border);
+            display: block;
+        }
+        .item-thumb-wrap { display: flex; align-items: flex-start; gap: 1rem; }
+        .item-thumb-wrap .fields { flex: 1; }
+
+        /* Mini upload zone */
+        .mini-upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            background: var(--bg);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: all var(--transition);
+        }
+        .mini-upload-zone:hover { border-color: var(--primary); color: var(--primary); }
+        .mini-upload-zone input[type="file"] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer;
+            width: 100%; height: 100%; border: none; padding: 0;
+        }
+
+        /* Partner logo grid */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .partner-item {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.75rem;
+            text-align: center;
+            position: relative;
+        }
+        .partner-item img {
+            width: 100%; height: 60px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .partner-item-name {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .partner-remove {
+            position: absolute;
+            top: 4px; right: 4px;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--danger);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.7rem;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+        .partner-item:hover .partner-remove { opacity: 1; }
+
+        /* Progress bar for uploads */
+        .upload-progress {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: 8px;
+            display: none;
+        }
+        .upload-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 2px;
+            width: 0;
+            transition: width 0.2s;
+        }
 
         /* ═══════════════════════════════════════
            TOAST NOTIFICATION
@@ -813,14 +837,10 @@
             border-radius: var(--radius);
             padding: 12px 18px;
             box-shadow: var(--shadow-md);
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 0.85rem; font-weight: 500;
+            display: flex; align-items: center; gap: 10px;
             min-width: 260px;
-            transform: translateX(120%);
-            opacity: 0;
+            transform: translateX(120%); opacity: 0;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .toast.show { transform: translateX(0); opacity: 1; }
@@ -848,6 +868,7 @@
             :root { --sidebar-w: 220px; }
             .overview-grid { grid-template-columns: 1fr 1fr; }
             .form-row { grid-template-columns: 1fr; }
+            .form-row-3 { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 680px) {
@@ -869,9 +890,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     AUTH SCREEN
-═══════════════════════════════════════ -->
+<!-- AUTH SCREEN -->
 <div id="auth-screen">
     <div class="auth-card">
         <div class="auth-logo">ER</div>
@@ -885,9 +904,7 @@
     </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     ADMIN DASHBOARD
-═══════════════════════════════════════ -->
+<!-- ADMIN DASHBOARD -->
 <div id="admin-screen">
 
     <!-- Navbar -->
@@ -930,30 +947,25 @@
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
                     About Me
                 </div>
-                <div class="nav-item locked">
+                <div class="nav-item" data-panel="services">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 100 18A9 9 0 0012 3z"/><path d="M12 8v4l3 3"/></svg>
                     Services
-                    <span class="lock-badge">🔒</span>
                 </div>
-                <div class="nav-item locked">
+                <div class="nav-item" data-panel="portfolio">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
                     Portfolio
-                    <span class="lock-badge">🔒</span>
                 </div>
-                <div class="nav-item locked">
-                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+                <div class="nav-item" data-panel="awards">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
                     Awards
-                    <span class="lock-badge">🔒</span>
                 </div>
-                <div class="nav-item locked">
+                <div class="nav-item" data-panel="partners">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     Academe Partners
-                    <span class="lock-badge">🔒</span>
                 </div>
-                <div class="nav-item locked">
+                <div class="nav-item" data-panel="news">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
                     News & Updates
-                    <span class="lock-badge">🔒</span>
                 </div>
             </div>
 
@@ -978,123 +990,52 @@
                     <p>Welcome to the Erovoutika Admin Console. Manage your live site content from here.</p>
                 </div>
 
-                <!-- Stats -->
                 <div class="overview-grid">
                     <div class="stat-card">
                         <div class="stat-label">Active Sections</div>
-                        <div class="stat-value">1</div>
-                        <div class="stat-desc">About Me is currently editable</div>
+                        <div class="stat-value">6</div>
+                        <div class="stat-desc">All content sections editable</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Firebase Status</div>
-                        <div class="stat-value" style="font-size:1rem; padding-top:8px;"><span class="status-badge badge-live" id="db-status">Connecting...</span></div>
+                        <div class="stat-value" style="font-size:1rem; padding-top:8px;"><span class="status-badge badge-draft" id="db-status">Connecting...</span></div>
                         <div class="stat-desc">Firestore cloud database</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Locked Sections</div>
-                        <div class="stat-value">5</div>
-                        <div class="stat-desc">Coming in future updates</div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-desc">All sections fully unlocked</div>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">
-                            <div class="card-title-icon">⚡</div>
-                            Quick Access
-                        </div>
+                        <div class="card-title"><div class="card-title-icon">⚡</div> Quick Access</div>
                     </div>
                     <div class="quick-links">
                         <div class="quick-link-btn" onclick="showPanel('about')">
                             <div class="ql-icon">👤</div>
-                            <div class="ql-text">
-                                <strong>Edit About Me</strong>
-                                <span>Update headline, bio & photo</span>
-                            </div>
+                            <div class="ql-text"><strong>About Me</strong><span>Headline, bio & photo</span></div>
                         </div>
-                        <a href="#" id="ql-live-site" target="_blank" class="quick-link-btn">
-                            <div class="ql-icon">🌐</div>
-                            <div class="ql-text">
-                                <strong>View Live Site</strong>
-                                <span>See your changes live</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Tutorial -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <div class="card-title-icon">📖</div>
-                            How to Use This Admin Panel
+                        <div class="quick-link-btn" onclick="showPanel('services')">
+                            <div class="ql-icon">⚙️</div>
+                            <div class="ql-text"><strong>Services</strong><span>Edit service cards</span></div>
                         </div>
-                        <span class="status-badge badge-live">Guide</span>
-                    </div>
-
-                    <div class="tutorial-steps">
-                        <div class="tutorial-step">
-                            <div class="step-num">1</div>
-                            <div class="step-content">
-                                <h4>Sign In & Access</h4>
-                                <p>Log in using your authorized Google account. Only the registered admin email can access the console. If you see "Access Denied", your email is not registered as an administrator.</p>
-                                <span class="step-tag">🔐 Authentication</span>
-                            </div>
+                        <div class="quick-link-btn" onclick="showPanel('portfolio')">
+                            <div class="ql-icon">🗂️</div>
+                            <div class="ql-text"><strong>Portfolio</strong><span>Gallery images</span></div>
                         </div>
-
-                        <div class="tutorial-step">
-                            <div class="step-num">2</div>
-                            <div class="step-content">
-                                <h4>Navigate Using the Sidebar</h4>
-                                <p>The left sidebar lists all content sections. Click a section name to open its editor. Sections marked with 🔒 are locked and will be unlocked in future updates. Currently, <strong>About Me</strong> is fully editable.</p>
-                                <span class="step-tag">🗂 Navigation</span>
-                            </div>
+                        <div class="quick-link-btn" onclick="showPanel('awards')">
+                            <div class="ql-icon">🏆</div>
+                            <div class="ql-text"><strong>Awards</strong><span>Award images & captions</span></div>
                         </div>
-
-                        <div class="tutorial-step">
-                            <div class="step-num">3</div>
-                            <div class="step-content">
-                                <h4>Edit the About Me Section</h4>
-                                <p>Inside the <strong>About Me</strong> editor, you can change the main headline, the description paragraph, upload a new photo, and control the image display size using the slider or width/height inputs. A live preview updates as you adjust settings.</p>
-                                <span class="step-tag">✏️ Content Editing</span>
-                            </div>
+                        <div class="quick-link-btn" onclick="showPanel('partners')">
+                            <div class="ql-icon">🏛️</div>
+                            <div class="ql-text"><strong>Academe Partners</strong><span>Marquee logos</span></div>
                         </div>
-
-                        <div class="tutorial-step">
-                            <div class="step-num">4</div>
-                            <div class="step-content">
-                                <h4>Upload & Resize the About Photo</h4>
-                                <p>Click or drag an image into the upload zone. Use the <strong>Width slider</strong> to control how large the image appears on the live site. Select an <strong>Object Fit</strong> preset to control how the photo fills its container. The preview updates instantly.</p>
-                                <span class="step-tag">🖼 Image Controls</span>
-                            </div>
-                        </div>
-
-                        <div class="tutorial-step">
-                            <div class="step-num">5</div>
-                            <div class="step-content">
-                                <h4>Save & Publish Changes</h4>
-                                <p>Click <strong>Publish Changes</strong> to save your edits. This writes your content (text, image URL, and size settings) directly to Firebase Firestore. The changes become live on the website immediately after saving.</p>
-                                <span class="step-tag">☁️ Firebase Sync</span>
-                            </div>
-                        </div>
-
-                        <div class="tutorial-step">
-                            <div class="step-num">6</div>
-                            <div class="step-content">
-                                <h4>How Firebase Sync Works</h4>
-                                <p>This admin panel stores all content in a <strong>Firebase Firestore</strong> cloud database. The live website (<code>index.html</code>) reads from the same database on every page load — so any changes you publish here appear on the site automatically, without re-deploying any files.</p>
-                                <span class="step-tag">🔁 Live Sync</span>
-                            </div>
-                        </div>
-
-                        <div class="tutorial-step">
-                            <div class="step-num">7</div>
-                            <div class="step-content">
-                                <h4>Switch Light / Dark Mode</h4>
-                                <p>Toggle the switch in the top-right navbar to switch between <strong>Light Mode</strong> (white/navy, ideal for daylight) and <strong>Dark Mode</strong> (deep navy/indigo, easier on the eyes at night). Your preference is saved automatically.</p>
-                                <span class="step-tag">🌙 Theme</span>
-                            </div>
+                        <div class="quick-link-btn" onclick="showPanel('news')">
+                            <div class="ql-icon">📰</div>
+                            <div class="ql-text"><strong>News & Updates</strong><span>News cards & dates</span></div>
                         </div>
                     </div>
                 </div>
@@ -1104,39 +1045,28 @@
             <div class="panel" id="panel-about">
                 <div class="panel-header">
                     <h2>About Me Editor</h2>
-                    <p>Edit the About section content, image, and display settings for the live site.</p>
+                    <p>Edit the About / Who We Are section content, image, and display settings for the live site.</p>
                 </div>
 
-                <!-- Text Content Card -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">
-                            <div class="card-title-icon">✍️</div>
-                            Text Content
-                        </div>
+                        <div class="card-title"><div class="card-title-icon">✍️</div> Text Content</div>
                         <span class="status-badge badge-live" id="about-save-status">Synced</span>
                     </div>
-
                     <div class="form-group">
                         <label>Main Headline <span class="required">*</span></label>
                         <input type="text" id="about-headline" placeholder="e.g., Respected. Experienced. Innovative.">
                     </div>
-
                     <div class="form-group">
                         <label>Who We Are <span class="hint">— Description paragraph</span><span class="required">*</span></label>
                         <textarea id="about-desc" rows="5" placeholder="Write your company bio, mission, or operational description..."></textarea>
                     </div>
                 </div>
 
-                <!-- Image Card -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">
-                            <div class="card-title-icon">🖼</div>
-                            Featured Image
-                        </div>
+                        <div class="card-title"><div class="card-title-icon">🖼</div> Featured Image</div>
                     </div>
-
                     <div class="form-group">
                         <label>Upload Photo</label>
                         <div class="image-upload-zone" id="upload-zone">
@@ -1154,7 +1084,6 @@
                         </div>
                     </div>
 
-                    <!-- Image Size Controls -->
                     <div class="form-group">
                         <label>Image Display Width <span class="hint">— controls size on live site</span></label>
                         <div class="slider-wrapper">
@@ -1193,7 +1122,6 @@
                     </div>
                 </div>
 
-                <!-- Actions -->
                 <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <button id="save-about-btn" class="btn btn-primary">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1206,9 +1134,196 @@
                 </div>
             </div>
 
-        </main><!-- /main -->
-    </div><!-- /layout -->
-</div><!-- /admin-screen -->
+            <!-- ── SERVICES PANEL ── -->
+            <div class="panel" id="panel-services">
+                <div class="panel-header">
+                    <h2>Services Editor</h2>
+                    <p>Edit the service cards shown in the stacked services section on the live site. Each card has an icon, number tag, title, and description.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">📋</div> Section Introduction</div>
+                        <span class="status-badge badge-live" id="services-save-status">Synced</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Section Subtitle <span class="hint">— appears above "Our Services"</span></label>
+                        <input type="text" id="services-subtitle" placeholder="e.g., What We Do">
+                    </div>
+                    <div class="form-group">
+                        <label>Section Description <span class="hint">— paragraph below the title</span></label>
+                        <textarea id="services-desc" rows="3" placeholder="Erovoutika is a respected and experienced..."></textarea>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">⚙️</div> Service Cards</div>
+                        <button class="btn btn-ghost btn-sm" id="add-service-btn">+ Add Card</button>
+                    </div>
+                    <div class="item-list" id="services-list">
+                        <!-- Service rows injected here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="save-services-btn" class="btn btn-primary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Publish Changes
+                    </button>
+                    <button id="reset-services-btn" class="btn btn-ghost">Reload from Database</button>
+                </div>
+            </div>
+
+            <!-- ── PORTFOLIO PANEL ── -->
+            <div class="panel" id="panel-portfolio">
+                <div class="panel-header">
+                    <h2>Portfolio Editor</h2>
+                    <p>Manage the gallery grid images shown in the Portfolio section. Each item has an image URL and alt text.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">🖼</div> Gallery Images</div>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <span class="status-badge badge-live" id="portfolio-save-status">Synced</span>
+                            <button class="btn btn-ghost btn-sm" id="add-portfolio-btn">+ Add Image</button>
+                        </div>
+                    </div>
+                    <div class="item-list" id="portfolio-list">
+                        <!-- Portfolio rows injected here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="save-portfolio-btn" class="btn btn-primary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Publish Changes
+                    </button>
+                    <button id="reset-portfolio-btn" class="btn btn-ghost">Reload from Database</button>
+                </div>
+            </div>
+
+            <!-- ── AWARDS PANEL ── -->
+            <div class="panel" id="panel-awards">
+                <div class="panel-header">
+                    <h2>Awards & Accreditations Editor</h2>
+                    <p>Edit award images and their captions shown in the Awards section of the live site.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">🏆</div> Award Items</div>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <span class="status-badge badge-live" id="awards-save-status">Synced</span>
+                            <button class="btn btn-ghost btn-sm" id="add-award-btn">+ Add Award</button>
+                        </div>
+                    </div>
+                    <div class="item-list" id="awards-list">
+                        <!-- Award rows injected here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="save-awards-btn" class="btn btn-primary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Publish Changes
+                    </button>
+                    <button id="reset-awards-btn" class="btn btn-ghost">Reload from Database</button>
+                </div>
+            </div>
+
+            <!-- ── ACADEME PARTNERS PANEL ── -->
+            <div class="panel" id="panel-partners">
+                <div class="panel-header">
+                    <h2>Academe Partners Editor</h2>
+                    <p>Manage the partner and university logos displayed in the scrolling marquee on the live site.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">🏛️</div> Partner Logos</div>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <span class="status-badge badge-live" id="partners-save-status">Synced</span>
+                            <button class="btn btn-ghost btn-sm" id="add-partner-btn">+ Add Partner</button>
+                        </div>
+                    </div>
+                    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;">The marquee auto-duplicates all logos for a seamless loop. You only manage the unique set here.</p>
+                    <div class="partner-grid" id="partners-grid">
+                        <!-- Partner cards injected here -->
+                    </div>
+                </div>
+
+                <!-- Add/Edit partner form -->
+                <div class="card" id="partner-form-card" style="display:none;">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">➕</div> <span id="partner-form-title">Add Partner</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Logo URL <span class="required">*</span></label>
+                            <input type="url" id="partner-url-input" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label>Alt Text / Name <span class="required">*</span></label>
+                            <input type="text" id="partner-alt-input" placeholder="e.g., Partner 1">
+                        </div>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;">Or upload directly:</p>
+                    <div class="mini-upload-zone" id="partner-upload-zone">
+                        <input type="file" id="partner-image-file" accept="image/*">
+                        📂 Click to upload logo image
+                    </div>
+                    <div class="upload-progress" id="partner-upload-progress">
+                        <div class="upload-progress-bar" id="partner-upload-bar"></div>
+                    </div>
+                    <div style="display:flex;gap:8px;margin-top:1rem;">
+                        <button class="btn btn-primary btn-sm" id="partner-form-save">Save Partner</button>
+                        <button class="btn btn-ghost btn-sm" id="partner-form-cancel">Cancel</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="save-partners-btn" class="btn btn-primary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Publish Changes
+                    </button>
+                    <button id="reset-partners-btn" class="btn btn-ghost">Reload from Database</button>
+                </div>
+            </div>
+
+            <!-- ── NEWS & UPDATES PANEL ── -->
+            <div class="panel" id="panel-news">
+                <div class="panel-header">
+                    <h2>News & Updates Editor</h2>
+                    <p>Edit news cards — each card has an image, date, title, and a "Read More" link shown on the live site.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><div class="card-title-icon">📰</div> News Cards</div>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            <span class="status-badge badge-live" id="news-save-status">Synced</span>
+                            <button class="btn btn-ghost btn-sm" id="add-news-btn">+ Add Card</button>
+                        </div>
+                    </div>
+                    <div class="item-list" id="news-list">
+                        <!-- News rows injected here -->
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="save-news-btn" class="btn btn-primary">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Publish Changes
+                    </button>
+                    <button id="reset-news-btn" class="btn btn-ghost">Reload from Database</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
 
 <!-- Toast Container -->
 <div id="toast-container"></div>
@@ -1220,14 +1335,12 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
         from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc }
+    import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, deleteDoc }
         from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
     import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL }
         from "https://www.gstatic.com/firebasejs/12.12.1/firebase-storage.js";
 
     // ── CONFIGURATION ──────────────────────
-    // Replace with your actual firebase-config.js values if using module import,
-    // or keep this inline config for standalone use.
     const firebaseConfig = {
         apiKey: "AIzaSyD5GwkaU3qKf-jdG2R7QQyGADuYIPedlkY",
         authDomain: "erovoutika-cms-b2f23.firebaseapp.com",
@@ -1249,7 +1362,6 @@
     const LIVE_SITE_URL = "index4_1_.html";
     document.getElementById('view-live-btn').href = LIVE_SITE_URL;
     document.getElementById('live-site-link').href = LIVE_SITE_URL;
-    document.getElementById('ql-live-site').href = LIVE_SITE_URL;
 
     // ── INIT FIREBASE ──────────────────────
     const app = initializeApp(firebaseConfig);
@@ -1295,12 +1407,6 @@
         item.addEventListener('click', () => showPanel(item.dataset.panel));
     });
 
-    document.querySelectorAll('.content-item[data-panel]').forEach(item => {
-        item.addEventListener('click', () => {
-            if (!item.classList.contains('locked')) showPanel(item.dataset.panel);
-        });
-    });
-
     // ── AUTH GUARD ────────────────────────
     onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -1309,7 +1415,15 @@
                 adminScreen.style.display = 'block';
                 document.getElementById('user-email').textContent = user.email;
                 document.getElementById('user-avatar').textContent = user.email.charAt(0).toUpperCase();
-                await loadAboutData();
+                // Load all sections
+                await Promise.all([
+                    loadAboutData(),
+                    loadServicesData(),
+                    loadPortfolioData(),
+                    loadAwardsData(),
+                    loadPartnersData(),
+                    loadNewsData()
+                ]);
                 document.getElementById('db-status').textContent = 'Connected';
                 document.getElementById('db-status').className = 'status-badge badge-live';
             } else {
@@ -1340,7 +1454,10 @@
 
     document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
 
-    // ── LOAD ABOUT DATA ───────────────────
+    // ═══════════════════════════════════════
+    // SECTION: ABOUT ME
+    // Firestore: sections/about
+    // ═══════════════════════════════════════
     async function loadAboutData() {
         try {
             const snap = await getDoc(doc(db, 'sections', 'about'));
@@ -1354,8 +1471,6 @@
                 currentImageUrl = data.imageUrl;
                 showImagePreview(data.imageUrl);
             }
-
-            // Size settings
             if (data.imgWidth) {
                 document.getElementById('img-width-slider').value = data.imgWidth;
                 document.getElementById('img-width-label').textContent = data.imgWidth + '%';
@@ -1373,8 +1488,8 @@
             document.getElementById('about-save-status').className = 'status-badge badge-live';
             updateSizePreview();
         } catch (err) {
-            console.error("Load error:", err);
-            toast("Failed to load database content", "error");
+            console.error("Load about error:", err);
+            toast("Failed to load About data", "error");
         }
     }
 
@@ -1388,7 +1503,6 @@
         updateSizePreview();
     }
 
-    // ── IMAGE FILE INPUT ──────────────────
     document.getElementById('about-image-file').addEventListener('change', function () {
         if (!this.files.length) return;
         newFileSelected = true;
@@ -1397,16 +1511,14 @@
         document.getElementById('upload-zone').style.borderColor = 'var(--success)';
     });
 
-    // Drag & drop
     const zone = document.getElementById('upload-zone');
     zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
     zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
     zone.addEventListener('drop', e => {
         e.preventDefault();
         zone.classList.remove('drag-over');
-        const dt = e.dataTransfer;
-        if (dt.files.length) {
-            document.getElementById('about-image-file').files = dt.files;
+        if (e.dataTransfer.files.length) {
+            document.getElementById('about-image-file').files = e.dataTransfer.files;
             document.getElementById('about-image-file').dispatchEvent(new Event('change'));
         }
     });
@@ -1423,7 +1535,6 @@
         zone.style.borderColor = '';
     });
 
-    // ── SIZE CONTROLS ─────────────────────
     const widthSlider = document.getElementById('img-width-slider');
     const widthLabel  = document.getElementById('img-width-label');
 
@@ -1431,7 +1542,6 @@
         widthLabel.textContent = widthSlider.value + '%';
         updateSizePreview();
     });
-
     document.getElementById('img-max-width').addEventListener('input', updateSizePreview);
     document.getElementById('img-max-height').addEventListener('input', updateSizePreview);
 
@@ -1448,16 +1558,13 @@
         const w = widthSlider.value + '%';
         const mw = document.getElementById('img-max-width').value;
         const mh = document.getElementById('img-max-height').value;
-        const fit = selectedFit;
-
         sizePrevImg.style.width = w;
         sizePrevImg.style.maxWidth = mw ? mw + 'px' : '';
         sizePrevImg.style.maxHeight = mh ? mh + 'px' : '220px';
-        sizePrevImg.style.objectFit = fit === 'none' ? 'none' : fit;
+        sizePrevImg.style.objectFit = selectedFit === 'none' ? 'none' : selectedFit;
         sizePrevImg.style.height = mh ? mh + 'px' : 'auto';
     }
 
-    // ── SAVE / PUBLISH ────────────────────
     document.getElementById('save-about-btn').addEventListener('click', async () => {
         const btn = document.getElementById('save-about-btn');
         const headline    = document.getElementById('about-headline').value.trim();
@@ -1467,9 +1574,7 @@
         const imgMaxWidth = document.getElementById('img-max-width').value;
         const imgMaxHeight = document.getElementById('img-max-height').value;
 
-        if (!headline || !description) {
-            return toast("Please fill in both the Headline and Description fields.", "error");
-        }
+        if (!headline || !description) return toast("Please fill in both Headline and Description.", "error");
 
         btn.disabled = true;
         btn.innerHTML = `<div class="spinner"></div> Publishing...`;
@@ -1478,7 +1583,6 @@
 
         try {
             let finalImageUrl = currentImageUrl;
-
             if (fileInput.files.length > 0 && newFileSelected) {
                 const file = fileInput.files[0];
                 const sRef = storageRef(storage, `about/${Date.now()}_${file.name}`);
@@ -1489,27 +1593,25 @@
             }
 
             await setDoc(doc(db, 'sections', 'about'), {
-                headline:     headline,
-                description:  description,
-                imageUrl:     finalImageUrl,
-                imgWidth:     Number(imgWidth),
-                imgMaxWidth:  imgMaxWidth ? Number(imgMaxWidth) : null,
+                headline, description,
+                imageUrl: finalImageUrl,
+                imgWidth: Number(imgWidth),
+                imgMaxWidth: imgMaxWidth ? Number(imgMaxWidth) : null,
                 imgMaxHeight: imgMaxHeight ? Number(imgMaxHeight) : null,
-                imgFit:       selectedFit,
-                updatedAt:    new Date().toISOString()
+                imgFit: selectedFit,
+                updatedAt: new Date().toISOString()
             });
 
             document.getElementById('about-save-status').textContent = 'Synced';
             document.getElementById('about-save-status').className = 'status-badge badge-live';
-            toast("Changes published successfully to the live site! ✓", "success");
+            toast("About Me published successfully! ✓", "success");
             fileInput.value = '';
             zone.style.borderColor = '';
-
         } catch (err) {
-            console.error("Save error:", err);
+            console.error("Save about error:", err);
             document.getElementById('about-save-status').textContent = 'Error';
             document.getElementById('about-save-status').className = 'status-badge badge-draft';
-            toast("Failed to publish. Check console for details.", "error");
+            toast("Failed to publish About Me.", "error");
         } finally {
             btn.disabled = false;
             btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish Changes`;
@@ -1517,9 +1619,768 @@
     });
 
     document.getElementById('reset-about-btn').addEventListener('click', async () => {
-        if (!confirm("Reload data from the database? Any unsaved changes will be lost.")) return;
+        if (!confirm("Reload data from the database? Unsaved changes will be lost.")) return;
         newFileSelected = false;
         await loadAboutData();
+        toast("Reloaded from database.", "info");
+    });
+
+    // ═══════════════════════════════════════
+    // SECTION: SERVICES
+    // Firestore: sections/services  (doc with {subtitle, description, cards: []})
+    // ═══════════════════════════════════════
+
+    // Default service cards matching index4(1).html
+    const DEFAULT_SERVICES = [
+        { icon: '🎓', number: '01 — Certifications', title: 'Training &\nCertifications', body: 'Specialized certification for training, learning and development professionals seeking ways to increase business performance through innovative and collaborative training methods.' },
+        { icon: '⚙️', number: '02 — Automation', title: 'Automation\nSolutions', body: 'PLC drivers and industrial communications software products for industrial and process automation — purpose-built for modern manufacturing environments.' },
+        { icon: '🤖', number: '03 — Engineering', title: 'Robotics', body: 'Intersection of science, engineering and technology — producing machines that replicate or substitute for human actions across industries.' },
+        { icon: '🔬', number: '04 — Innovation', title: 'Research &\nDevelopment', body: 'Activities that companies undertake to innovate and introduce new products and services — often the first stage in the development process.' },
+        { icon: '🛡️', number: '05 — Security', title: 'Cybersecurity', body: 'Application of technologies, processes, and controls to protect systems, networks, programs, devices, and data from cyberattacks.' },
+        { icon: '🔗', number: '06 — Decentralized', title: 'Blockchain', body: 'Maintaining a secure and decentralized record of transactions — best known for their crucial role in cryptocurrency systems such as Bitcoin.' }
+    ];
+
+    let servicesData = { subtitle: 'What We Do', description: '', cards: [...DEFAULT_SERVICES] };
+
+    async function loadServicesData() {
+        try {
+            const snap = await getDoc(doc(db, 'sections', 'services'));
+            if (snap.exists()) servicesData = snap.data();
+            else servicesData = { subtitle: 'What We Do', description: 'Erovoutika is a respected and experienced Automation and Robotics Company. Our highly professional team has been successfully delivering customer needs across industries.', cards: [...DEFAULT_SERVICES] };
+
+            document.getElementById('services-subtitle').value = servicesData.subtitle || '';
+            document.getElementById('services-desc').value = servicesData.description || '';
+            renderServicesList();
+            document.getElementById('services-save-status').textContent = 'Synced';
+            document.getElementById('services-save-status').className = 'status-badge badge-live';
+        } catch (err) {
+            console.error("Load services error:", err);
+            toast("Failed to load Services data", "error");
+        }
+    }
+
+    function renderServicesList() {
+        const list = document.getElementById('services-list');
+        list.innerHTML = '';
+        (servicesData.cards || []).forEach((card, i) => {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <div class="item-row-header">
+                    <span class="item-row-label">Service Card ${i + 1}</span>
+                    <div class="item-row-actions">
+                        <button class="btn btn-danger btn-sm" onclick="removeServiceCard(${i})">Remove</button>
+                    </div>
+                </div>
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label>Icon (emoji)</label>
+                        <input type="text" value="${card.icon || ''}" placeholder="🎓" oninput="updateServiceCard(${i},'icon',this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Number Label</label>
+                        <input type="text" value="${card.number || ''}" placeholder="01 — Certifications" oninput="updateServiceCard(${i},'number',this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Card Title</label>
+                        <input type="text" value="${card.title || ''}" placeholder="Training & Certifications" oninput="updateServiceCard(${i},'title',this.value)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="3" placeholder="Service description..." oninput="updateServiceCard(${i},'body',this.value)">${card.body || ''}</textarea>
+                </div>
+            `;
+            list.appendChild(row);
+        });
+    }
+
+    window.updateServiceCard = (i, field, val) => { servicesData.cards[i][field] = val; };
+    window.removeServiceCard = (i) => {
+        if (!confirm("Remove this service card?")) return;
+        servicesData.cards.splice(i, 1);
+        renderServicesList();
+    };
+
+    document.getElementById('add-service-btn').addEventListener('click', () => {
+        servicesData.cards.push({ icon: '⭐', number: `0${servicesData.cards.length + 1} — New`, title: 'New Service', body: '' });
+        renderServicesList();
+        // Scroll to last item
+        const list = document.getElementById('services-list');
+        list.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('save-services-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('save-services-btn');
+        const subtitle = document.getElementById('services-subtitle').value.trim();
+        const description = document.getElementById('services-desc').value.trim();
+
+        if (!subtitle) return toast("Please fill in the Section Subtitle.", "error");
+        if (servicesData.cards.some(c => !c.title.trim())) return toast("All service cards must have a title.", "error");
+
+        servicesData.subtitle = subtitle;
+        servicesData.description = description;
+
+        btn.disabled = true;
+        btn.innerHTML = `<div class="spinner"></div> Publishing...`;
+        document.getElementById('services-save-status').textContent = 'Saving...';
+        document.getElementById('services-save-status').className = 'status-badge badge-draft';
+
+        try {
+            await setDoc(doc(db, 'sections', 'services'), {
+                ...servicesData,
+                updatedAt: new Date().toISOString()
+            });
+            document.getElementById('services-save-status').textContent = 'Synced';
+            document.getElementById('services-save-status').className = 'status-badge badge-live';
+            toast("Services published successfully! ✓", "success");
+        } catch (err) {
+            console.error("Save services error:", err);
+            document.getElementById('services-save-status').textContent = 'Error';
+            document.getElementById('services-save-status').className = 'status-badge badge-draft';
+            toast("Failed to publish Services.", "error");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish Changes`;
+        }
+    });
+
+    document.getElementById('reset-services-btn').addEventListener('click', async () => {
+        if (!confirm("Reload Services from the database? Unsaved changes will be lost.")) return;
+        await loadServicesData();
+        toast("Reloaded from database.", "info");
+    });
+
+    // ═══════════════════════════════════════
+    // SECTION: PORTFOLIO
+    // Firestore: sections/portfolio  (doc with {items: [{imageUrl, alt}]})
+    // ═══════════════════════════════════════
+
+    const DEFAULT_PORTFOLIO = [
+        { imageUrl: 'https://erovoutika.ph/assets/images/porfolio/Tempo/auto-2.webp', alt: 'Automation' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/porfolio/robotics/robotic2.webp', alt: 'Robotics' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/porfolio/Trainings/training1.webp', alt: 'Training' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/porfolio/robotics/robotic4.webp', alt: 'Robotics 4' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/porfolio/Tempo/auto-5.webp', alt: 'Automation 5' }
+    ];
+
+    let portfolioData = { items: [...DEFAULT_PORTFOLIO] };
+    // Track newly selected files per portfolio row: {index: File}
+    let portfolioFiles = {};
+
+    async function loadPortfolioData() {
+        try {
+            const snap = await getDoc(doc(db, 'sections', 'portfolio'));
+            portfolioData = snap.exists() ? snap.data() : { items: [...DEFAULT_PORTFOLIO] };
+            portfolioFiles = {};
+            renderPortfolioList();
+            document.getElementById('portfolio-save-status').textContent = 'Synced';
+            document.getElementById('portfolio-save-status').className = 'status-badge badge-live';
+        } catch (err) {
+            console.error("Load portfolio error:", err);
+            toast("Failed to load Portfolio data", "error");
+        }
+    }
+
+    function renderPortfolioList() {
+        const list = document.getElementById('portfolio-list');
+        list.innerHTML = '';
+        (portfolioData.items || []).forEach((item, i) => {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <div class="item-row-header">
+                    <span class="item-row-label">Gallery Image ${i + 1}</span>
+                    <div class="item-row-actions">
+                        <button class="btn btn-danger btn-sm" onclick="removePortfolioItem(${i})">Remove</button>
+                    </div>
+                </div>
+                <div class="item-thumb-wrap">
+                    <div>
+                        <img class="item-thumb" id="port-thumb-${i}" src="${item.imageUrl || ''}" alt="${item.alt || ''}" onerror="this.src=''">
+                        <div class="mini-upload-zone" style="margin-top:6px;width:60px;font-size:0.7rem;padding:4px 6px;">
+                            <input type="file" accept="image/*" onchange="handlePortfolioFileSelect(${i}, this)">
+                            Upload
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="url" value="${item.imageUrl || ''}" placeholder="https://..." oninput="updatePortfolioItem(${i},'imageUrl',this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Alt Text</label>
+                            <input type="text" value="${item.alt || ''}" placeholder="e.g., Automation" oninput="updatePortfolioItem(${i},'alt',this.value)">
+                        </div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(row);
+        });
+    }
+
+    window.handlePortfolioFileSelect = (i, input) => {
+        if (!input.files.length) return;
+        portfolioFiles[i] = input.files[0];
+        const url = URL.createObjectURL(input.files[0]);
+        const thumb = document.getElementById(`port-thumb-${i}`);
+        if (thumb) thumb.src = url;
+        toast(`Image selected for item ${i + 1}. Click Publish to upload.`, "info");
+    };
+
+    window.updatePortfolioItem = (i, field, val) => {
+        portfolioData.items[i][field] = val;
+        if (field === 'imageUrl') {
+            const thumb = document.getElementById(`port-thumb-${i}`);
+            if (thumb) thumb.src = val;
+        }
+    };
+
+    window.removePortfolioItem = (i) => {
+        if (!confirm("Remove this portfolio image?")) return;
+        portfolioData.items.splice(i, 1);
+        delete portfolioFiles[i];
+        // Re-key portfolioFiles after splice
+        const newFiles = {};
+        Object.keys(portfolioFiles).forEach(k => {
+            const nk = Number(k);
+            if (nk > i) newFiles[nk - 1] = portfolioFiles[k];
+            else if (nk < i) newFiles[nk] = portfolioFiles[k];
+        });
+        portfolioFiles = newFiles;
+        renderPortfolioList();
+    };
+
+    document.getElementById('add-portfolio-btn').addEventListener('click', () => {
+        portfolioData.items.push({ imageUrl: '', alt: '' });
+        renderPortfolioList();
+        document.getElementById('portfolio-list').lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('save-portfolio-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('save-portfolio-btn');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="spinner"></div> Publishing...`;
+        document.getElementById('portfolio-save-status').textContent = 'Saving...';
+        document.getElementById('portfolio-save-status').className = 'status-badge badge-draft';
+
+        try {
+            // Upload any pending files
+            for (const [idxStr, file] of Object.entries(portfolioFiles)) {
+                const i = Number(idxStr);
+                const sRef = storageRef(storage, `portfolio/${Date.now()}_${file.name}`);
+                const task = await uploadBytesResumable(sRef, file);
+                const url = await getDownloadURL(task.ref);
+                portfolioData.items[i].imageUrl = url;
+            }
+            portfolioFiles = {};
+
+            if (portfolioData.items.some(item => !item.imageUrl.trim())) {
+                return toast("All portfolio items need an image URL.", "error");
+            }
+
+            await setDoc(doc(db, 'sections', 'portfolio'), {
+                items: portfolioData.items,
+                updatedAt: new Date().toISOString()
+            });
+            renderPortfolioList(); // refresh thumbnails with final URLs
+            document.getElementById('portfolio-save-status').textContent = 'Synced';
+            document.getElementById('portfolio-save-status').className = 'status-badge badge-live';
+            toast("Portfolio published successfully! ✓", "success");
+        } catch (err) {
+            console.error("Save portfolio error:", err);
+            document.getElementById('portfolio-save-status').textContent = 'Error';
+            document.getElementById('portfolio-save-status').className = 'status-badge badge-draft';
+            toast("Failed to publish Portfolio.", "error");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish Changes`;
+        }
+    });
+
+    document.getElementById('reset-portfolio-btn').addEventListener('click', async () => {
+        if (!confirm("Reload Portfolio from the database? Unsaved changes will be lost.")) return;
+        await loadPortfolioData();
+        toast("Reloaded from database.", "info");
+    });
+
+    // ═══════════════════════════════════════
+    // SECTION: AWARDS
+    // Firestore: sections/awards  (doc with {items: [{imageUrl, alt, caption}]})
+    // ═══════════════════════════════════════
+
+    const DEFAULT_AWARDS = [
+        { imageUrl: 'https://erovoutika.ph/assets/images/awards/award1.webp', alt: 'PESMS', caption: 'PESMS Best Choice Awardee 2020–2021' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/awards/award2.webp', alt: 'CompTIA', caption: 'CompTIA Authorized Partner' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/awards/award3.webp', alt: 'Q Asia', caption: 'Q Asia Quality Excellence Awardee 2020–2021' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/awards/award4.webp', alt: 'CPD', caption: 'CPD Provider Accreditation ECE-2022-014' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/awards/award5.webp', alt: 'PSMA', caption: 'Philippine Social Media Awards Star Brand 2020' }
+    ];
+
+    let awardsData = { items: [...DEFAULT_AWARDS] };
+    let awardsFiles = {};
+
+    async function loadAwardsData() {
+        try {
+            const snap = await getDoc(doc(db, 'sections', 'awards'));
+            awardsData = snap.exists() ? snap.data() : { items: [...DEFAULT_AWARDS] };
+            awardsFiles = {};
+            renderAwardsList();
+            document.getElementById('awards-save-status').textContent = 'Synced';
+            document.getElementById('awards-save-status').className = 'status-badge badge-live';
+        } catch (err) {
+            console.error("Load awards error:", err);
+            toast("Failed to load Awards data", "error");
+        }
+    }
+
+    function renderAwardsList() {
+        const list = document.getElementById('awards-list');
+        list.innerHTML = '';
+        (awardsData.items || []).forEach((item, i) => {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <div class="item-row-header">
+                    <span class="item-row-label">Award ${i + 1}</span>
+                    <div class="item-row-actions">
+                        <button class="btn btn-danger btn-sm" onclick="removeAwardItem(${i})">Remove</button>
+                    </div>
+                </div>
+                <div class="item-thumb-wrap">
+                    <div>
+                        <img class="item-thumb" id="award-thumb-${i}" src="${item.imageUrl || ''}" alt="${item.alt || ''}" onerror="this.src=''">
+                        <div class="mini-upload-zone" style="margin-top:6px;width:60px;font-size:0.7rem;padding:4px 6px;">
+                            <input type="file" accept="image/*" onchange="handleAwardFileSelect(${i}, this)">
+                            Upload
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="url" value="${item.imageUrl || ''}" placeholder="https://..." oninput="updateAwardItem(${i},'imageUrl',this.value)">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Alt Text</label>
+                                <input type="text" value="${item.alt || ''}" placeholder="e.g., PESMS" oninput="updateAwardItem(${i},'alt',this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label>Caption</label>
+                                <input type="text" value="${item.caption || ''}" placeholder="Award description..." oninput="updateAwardItem(${i},'caption',this.value)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(row);
+        });
+    }
+
+    window.handleAwardFileSelect = (i, input) => {
+        if (!input.files.length) return;
+        awardsFiles[i] = input.files[0];
+        const thumb = document.getElementById(`award-thumb-${i}`);
+        if (thumb) thumb.src = URL.createObjectURL(input.files[0]);
+        toast(`Award image selected for item ${i + 1}. Click Publish to upload.`, "info");
+    };
+
+    window.updateAwardItem = (i, field, val) => {
+        awardsData.items[i][field] = val;
+        if (field === 'imageUrl') {
+            const thumb = document.getElementById(`award-thumb-${i}`);
+            if (thumb) thumb.src = val;
+        }
+    };
+
+    window.removeAwardItem = (i) => {
+        if (!confirm("Remove this award?")) return;
+        awardsData.items.splice(i, 1);
+        delete awardsFiles[i];
+        const newFiles = {};
+        Object.keys(awardsFiles).forEach(k => {
+            const nk = Number(k);
+            if (nk > i) newFiles[nk - 1] = awardsFiles[k];
+            else if (nk < i) newFiles[nk] = awardsFiles[k];
+        });
+        awardsFiles = newFiles;
+        renderAwardsList();
+    };
+
+    document.getElementById('add-award-btn').addEventListener('click', () => {
+        awardsData.items.push({ imageUrl: '', alt: '', caption: '' });
+        renderAwardsList();
+        document.getElementById('awards-list').lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('save-awards-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('save-awards-btn');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="spinner"></div> Publishing...`;
+        document.getElementById('awards-save-status').textContent = 'Saving...';
+        document.getElementById('awards-save-status').className = 'status-badge badge-draft';
+
+        try {
+            for (const [idxStr, file] of Object.entries(awardsFiles)) {
+                const i = Number(idxStr);
+                const sRef = storageRef(storage, `awards/${Date.now()}_${file.name}`);
+                const task = await uploadBytesResumable(sRef, file);
+                awardsData.items[i].imageUrl = await getDownloadURL(task.ref);
+            }
+            awardsFiles = {};
+
+            if (awardsData.items.some(item => !item.imageUrl.trim() || !item.caption.trim())) {
+                return toast("All awards need an image URL and a caption.", "error");
+            }
+
+            await setDoc(doc(db, 'sections', 'awards'), {
+                items: awardsData.items,
+                updatedAt: new Date().toISOString()
+            });
+            renderAwardsList();
+            document.getElementById('awards-save-status').textContent = 'Synced';
+            document.getElementById('awards-save-status').className = 'status-badge badge-live';
+            toast("Awards published successfully! ✓", "success");
+        } catch (err) {
+            console.error("Save awards error:", err);
+            document.getElementById('awards-save-status').textContent = 'Error';
+            document.getElementById('awards-save-status').className = 'status-badge badge-draft';
+            toast("Failed to publish Awards.", "error");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish Changes`;
+        }
+    });
+
+    document.getElementById('reset-awards-btn').addEventListener('click', async () => {
+        if (!confirm("Reload Awards from the database? Unsaved changes will be lost.")) return;
+        await loadAwardsData();
+        toast("Reloaded from database.", "info");
+    });
+
+    // ═══════════════════════════════════════
+    // SECTION: ACADEME PARTNERS
+    // Firestore: sections/partners  (doc with {items: [{imageUrl, alt}]})
+    // ═══════════════════════════════════════
+
+    const DEFAULT_PARTNERS = [
+        { imageUrl: 'https://erovoutika.ph/assets/images/clients/client-1.webp', alt: 'Partner 1' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/clients/client-2.webp', alt: 'Partner 2' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/clients/client-3.webp', alt: 'Partner 3' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/clients/client-4.webp', alt: 'Partner 4' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/clients/client-5.webp', alt: 'Partner 5' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/clients/client-6.webp', alt: 'Partner 6' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo1.webp', alt: 'Univ 1' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo2.webp', alt: 'Univ 2' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo3.webp', alt: 'Univ 3' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo4.webp', alt: 'Univ 4' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo5.webp', alt: 'Univ 5' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo6.webp', alt: 'Univ 6' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo7.webp', alt: 'Univ 7' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/logo/universities-logo/univ-logo8.webp', alt: 'Univ 8' }
+    ];
+
+    let partnersData = { items: [...DEFAULT_PARTNERS] };
+    let partnerEditingIndex = -1; // -1 = new
+
+    async function loadPartnersData() {
+        try {
+            const snap = await getDoc(doc(db, 'sections', 'partners'));
+            partnersData = snap.exists() ? snap.data() : { items: [...DEFAULT_PARTNERS] };
+            renderPartnersGrid();
+            document.getElementById('partners-save-status').textContent = 'Synced';
+            document.getElementById('partners-save-status').className = 'status-badge badge-live';
+        } catch (err) {
+            console.error("Load partners error:", err);
+            toast("Failed to load Partners data", "error");
+        }
+    }
+
+    function renderPartnersGrid() {
+        const grid = document.getElementById('partners-grid');
+        grid.innerHTML = '';
+        (partnersData.items || []).forEach((item, i) => {
+            const div = document.createElement('div');
+            div.className = 'partner-item';
+            div.innerHTML = `
+                <img src="${item.imageUrl}" alt="${item.alt}" onerror="this.src=''">
+                <div class="partner-item-name">${item.alt}</div>
+                <button class="partner-remove" onclick="removePartner(${i})" title="Remove">✕</button>
+            `;
+            div.addEventListener('dblclick', () => openPartnerForm(i));
+            grid.appendChild(div);
+        });
+    }
+
+    window.removePartner = (i) => {
+        if (!confirm("Remove this partner?")) return;
+        partnersData.items.splice(i, 1);
+        renderPartnersGrid();
+    };
+
+    function openPartnerForm(editIndex = -1) {
+        partnerEditingIndex = editIndex;
+        const formCard = document.getElementById('partner-form-card');
+        formCard.style.display = 'block';
+        document.getElementById('partner-form-title').textContent = editIndex >= 0 ? 'Edit Partner' : 'Add Partner';
+
+        if (editIndex >= 0) {
+            const item = partnersData.items[editIndex];
+            document.getElementById('partner-url-input').value = item.imageUrl || '';
+            document.getElementById('partner-alt-input').value = item.alt || '';
+        } else {
+            document.getElementById('partner-url-input').value = '';
+            document.getElementById('partner-alt-input').value = '';
+        }
+        document.getElementById('partner-image-file').value = '';
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.getElementById('add-partner-btn').addEventListener('click', () => openPartnerForm(-1));
+
+    document.getElementById('partner-form-cancel').addEventListener('click', () => {
+        document.getElementById('partner-form-card').style.display = 'none';
+    });
+
+    // Handle partner image upload in the form
+    document.getElementById('partner-image-file').addEventListener('change', async function () {
+        if (!this.files.length) return;
+        const file = this.files[0];
+        const progress = document.getElementById('partner-upload-progress');
+        const bar = document.getElementById('partner-upload-bar');
+        progress.style.display = 'block';
+
+        try {
+            const sRef = storageRef(storage, `partners/${Date.now()}_${file.name}`);
+            const uploadTask = uploadBytesResumable(sRef, file);
+
+            uploadTask.on('state_changed', snapshot => {
+                const pct = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                bar.style.width = pct + '%';
+            });
+
+            await uploadTask;
+            const url = await getDownloadURL(uploadTask.snapshot.ref);
+            document.getElementById('partner-url-input').value = url;
+            toast("Logo uploaded!", "success");
+        } catch (err) {
+            console.error("Partner upload error:", err);
+            toast("Upload failed.", "error");
+        } finally {
+            progress.style.display = 'none';
+            bar.style.width = '0';
+        }
+    });
+
+    document.getElementById('partner-form-save').addEventListener('click', () => {
+        const url = document.getElementById('partner-url-input').value.trim();
+        const alt = document.getElementById('partner-alt-input').value.trim();
+        if (!url || !alt) return toast("Both logo URL and alt text are required.", "error");
+
+        if (partnerEditingIndex >= 0) {
+            partnersData.items[partnerEditingIndex] = { imageUrl: url, alt };
+        } else {
+            partnersData.items.push({ imageUrl: url, alt });
+        }
+
+        renderPartnersGrid();
+        document.getElementById('partner-form-card').style.display = 'none';
+        toast(partnerEditingIndex >= 0 ? "Partner updated." : "Partner added.", "success");
+    });
+
+    document.getElementById('save-partners-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('save-partners-btn');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="spinner"></div> Publishing...`;
+        document.getElementById('partners-save-status').textContent = 'Saving...';
+        document.getElementById('partners-save-status').className = 'status-badge badge-draft';
+
+        try {
+            await setDoc(doc(db, 'sections', 'partners'), {
+                items: partnersData.items,
+                updatedAt: new Date().toISOString()
+            });
+            document.getElementById('partners-save-status').textContent = 'Synced';
+            document.getElementById('partners-save-status').className = 'status-badge badge-live';
+            toast("Academe Partners published successfully! ✓", "success");
+        } catch (err) {
+            console.error("Save partners error:", err);
+            document.getElementById('partners-save-status').textContent = 'Error';
+            document.getElementById('partners-save-status').className = 'status-badge badge-draft';
+            toast("Failed to publish Partners.", "error");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish Changes`;
+        }
+    });
+
+    document.getElementById('reset-partners-btn').addEventListener('click', async () => {
+        if (!confirm("Reload Partners from the database? Unsaved changes will be lost.")) return;
+        document.getElementById('partner-form-card').style.display = 'none';
+        await loadPartnersData();
+        toast("Reloaded from database.", "info");
+    });
+
+    // ═══════════════════════════════════════
+    // SECTION: NEWS & UPDATES
+    // Firestore: sections/news  (doc with {items: [{imageUrl, alt, date, title, link}]})
+    // ═══════════════════════════════════════
+
+    const DEFAULT_NEWS = [
+        { imageUrl: 'https://erovoutika.ph/assets/images/hero_carousel/romania.webp', alt: 'Romania', date: 'April 20–22, 2023', title: 'Team Philippines Goes to Romania for International Robotics Championship', link: 'https://erovoutika.ph/readmore.php' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/hero_carousel/congrats.webp', alt: 'Interns', date: 'May 06, 2023', title: 'Congratulations to Our Former Engineering Interns — 89 Passers!', link: 'https://www.facebook.com/erovoutika' },
+        { imageUrl: 'https://erovoutika.ph/assets/images/porfolio/robotics/robotic6.webp', alt: 'Robolution', date: 'Coming Soon', title: 'ROBOLUTION 2023 — 2nd Edition. Watch This Space.', link: 'https://www.facebook.com/erovoutika' }
+    ];
+
+    let newsData = { items: [...DEFAULT_NEWS] };
+    let newsFiles = {};
+
+    async function loadNewsData() {
+        try {
+            const snap = await getDoc(doc(db, 'sections', 'news'));
+            newsData = snap.exists() ? snap.data() : { items: [...DEFAULT_NEWS] };
+            newsFiles = {};
+            renderNewsList();
+            document.getElementById('news-save-status').textContent = 'Synced';
+            document.getElementById('news-save-status').className = 'status-badge badge-live';
+        } catch (err) {
+            console.error("Load news error:", err);
+            toast("Failed to load News data", "error");
+        }
+    }
+
+    function renderNewsList() {
+        const list = document.getElementById('news-list');
+        list.innerHTML = '';
+        (newsData.items || []).forEach((item, i) => {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <div class="item-row-header">
+                    <span class="item-row-label">News Card ${i + 1}</span>
+                    <div class="item-row-actions">
+                        <button class="btn btn-danger btn-sm" onclick="removeNewsItem(${i})">Remove</button>
+                    </div>
+                </div>
+                <div class="item-thumb-wrap">
+                    <div>
+                        <img class="item-thumb" id="news-thumb-${i}" src="${item.imageUrl || ''}" alt="${item.alt || ''}" onerror="this.src=''">
+                        <div class="mini-upload-zone" style="margin-top:6px;width:60px;font-size:0.7rem;padding:4px 6px;">
+                            <input type="file" accept="image/*" onchange="handleNewsFileSelect(${i}, this)">
+                            Upload
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Image URL</label>
+                                <input type="url" value="${item.imageUrl || ''}" placeholder="https://..." oninput="updateNewsItem(${i},'imageUrl',this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label>Alt Text</label>
+                                <input type="text" value="${item.alt || ''}" placeholder="e.g., Romania" oninput="updateNewsItem(${i},'alt',this.value)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Date <span class="required">*</span></label>
+                                <input type="text" value="${item.date || ''}" placeholder="e.g., May 06, 2023" oninput="updateNewsItem(${i},'date',this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label>Read More Link</label>
+                                <input type="url" value="${item.link || ''}" placeholder="https://..." oninput="updateNewsItem(${i},'link',this.value)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Headline / Title <span class="required">*</span></label>
+                            <input type="text" value="${item.title || ''}" placeholder="News headline..." oninput="updateNewsItem(${i},'title',this.value)">
+                        </div>
+                    </div>
+                </div>
+            `;
+            list.appendChild(row);
+        });
+    }
+
+    window.handleNewsFileSelect = (i, input) => {
+        if (!input.files.length) return;
+        newsFiles[i] = input.files[0];
+        const thumb = document.getElementById(`news-thumb-${i}`);
+        if (thumb) thumb.src = URL.createObjectURL(input.files[0]);
+        toast(`News image selected for card ${i + 1}. Click Publish to upload.`, "info");
+    };
+
+    window.updateNewsItem = (i, field, val) => {
+        newsData.items[i][field] = val;
+        if (field === 'imageUrl') {
+            const thumb = document.getElementById(`news-thumb-${i}`);
+            if (thumb) thumb.src = val;
+        }
+    };
+
+    window.removeNewsItem = (i) => {
+        if (!confirm("Remove this news card?")) return;
+        newsData.items.splice(i, 1);
+        delete newsFiles[i];
+        const newFiles = {};
+        Object.keys(newsFiles).forEach(k => {
+            const nk = Number(k);
+            if (nk > i) newFiles[nk - 1] = newsFiles[k];
+            else if (nk < i) newFiles[nk] = newsFiles[k];
+        });
+        newsFiles = newFiles;
+        renderNewsList();
+    };
+
+    document.getElementById('add-news-btn').addEventListener('click', () => {
+        newsData.items.push({ imageUrl: '', alt: '', date: '', title: '', link: '' });
+        renderNewsList();
+        document.getElementById('news-list').lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    document.getElementById('save-news-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('save-news-btn');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="spinner"></div> Publishing...`;
+        document.getElementById('news-save-status').textContent = 'Saving...';
+        document.getElementById('news-save-status').className = 'status-badge badge-draft';
+
+        try {
+            // Upload any pending news images
+            for (const [idxStr, file] of Object.entries(newsFiles)) {
+                const i = Number(idxStr);
+                const sRef = storageRef(storage, `news/${Date.now()}_${file.name}`);
+                const task = await uploadBytesResumable(sRef, file);
+                newsData.items[i].imageUrl = await getDownloadURL(task.ref);
+            }
+            newsFiles = {};
+
+            if (newsData.items.some(item => !item.title.trim() || !item.date.trim())) {
+                return toast("All news cards need a title and date.", "error");
+            }
+
+            await setDoc(doc(db, 'sections', 'news'), {
+                items: newsData.items,
+                updatedAt: new Date().toISOString()
+            });
+            renderNewsList();
+            document.getElementById('news-save-status').textContent = 'Synced';
+            document.getElementById('news-save-status').className = 'status-badge badge-live';
+            toast("News & Updates published successfully! ✓", "success");
+        } catch (err) {
+            console.error("Save news error:", err);
+            document.getElementById('news-save-status').textContent = 'Error';
+            document.getElementById('news-save-status').className = 'status-badge badge-draft';
+            toast("Failed to publish News & Updates.", "error");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish Changes`;
+        }
+    });
+
+    document.getElementById('reset-news-btn').addEventListener('click', async () => {
+        if (!confirm("Reload News from the database? Unsaved changes will be lost.")) return;
+        await loadNewsData();
         toast("Reloaded from database.", "info");
     });
 
