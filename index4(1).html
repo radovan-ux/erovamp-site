@@ -1471,7 +1471,7 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .section-tag')
 /* ═══════════════════════════════════════════
    6. STACKED CARDS
 ═══════════════════════════════════════════ */
-const cards     = document.querySelectorAll('.scard');
+let cards = document.querySelectorAll('.scard');
 const stackArea = document.querySelector('.stack-area');
 
 function rotateCards() {
@@ -1490,18 +1490,23 @@ function rotateCards() {
 }
 rotateCards();
 
-window.addEventListener('scroll', () => {
-    if (!stackArea) return;
-    const distance = window.innerHeight * 0.6;
-    const topVal   = stackArea.getBoundingClientRect().top;
-    let rawIdx = Math.floor(-1 * (topVal / distance + 1));
-    let idx    = Math.min(cards.length - 2, rawIdx);
-
-    cards.forEach((card, i) => {
-        i <= idx ? card.classList.add('away') : card.classList.remove('away');
-    });
+window.__reinitCards = function () {
+    cards = document.querySelectorAll('.scard');
     rotateCards();
-}, { passive: true });
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            if (card.classList.contains('away')) return;
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width  - 0.5;
+            const y = (e.clientY - r.top)  / r.height - 0.5;
+            const base = parseFloat(card.style.transform.match(/rotate\(([^)]+)deg\)/)?.[1] || 0);
+            card.style.transform = `rotate(${base}deg) perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`;
+        });
+        card.addEventListener('mouseleave', () => rotateCards());
+        card.addEventListener('mouseenter', () => body.classList.add('cursor-hover'));
+        card.addEventListener('mouseleave', () => body.classList.remove('cursor-hover'));
+    });
+};
 
 cards.forEach(card => {
     card.addEventListener('mousemove', e => {
@@ -1602,6 +1607,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 
-<script type="module" src="js/erovoutika-cms.js"></script>
+<script type="module" src="erovoutika-cms.js"></script>
 </body>
 </html>
