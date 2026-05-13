@@ -1490,8 +1490,40 @@ function rotateCards() {
 }
 rotateCards();
 
+/* ── Scroll-driven card dismissal ──────────────────────────────────────────
+   The .stack-area is 400 vh tall with sticky columns so there is 300 vh of
+   "scroll budget" available while the section is pinned.  We divide that
+   budget evenly among the cards so each one flies away in turn.
+─────────────────────────────────────────────────────────────────────────── */
+function handleStackScroll() {
+    if (!stackArea) return;
+    const rect      = stackArea.getBoundingClientRect();
+    const scrolled  = -rect.top;                        // px scrolled past top
+    const budget    = rect.height - window.innerHeight; // total scroll budget
+    if (scrolled < 0 || scrolled > budget + window.innerHeight) return;
+
+    const numCards  = cards.length;
+    const step      = budget / numCards;                // px per card
+
+    cards.forEach((card, i) => {
+        card.classList.toggle('away', scrolled >= step * (i + 1));
+    });
+    rotateCards();
+}
+
+// Register the scroll listener once; store a reference so we can remove it
+// when __reinitCards replaces the cards NodeList.
+let _stackScrollListener = handleStackScroll;
+window.addEventListener('scroll', _stackScrollListener, { passive: true });
+handleStackScroll(); // run once on page load in case already scrolled
+
 window.__reinitCards = function () {
     cards = document.querySelectorAll('.scard');
+    // Remove old listener, re-register so the new cards NodeList is captured
+    window.removeEventListener('scroll', _stackScrollListener);
+    _stackScrollListener = handleStackScroll;
+    window.addEventListener('scroll', _stackScrollListener, { passive: true });
+    handleStackScroll();
     rotateCards();
     cards.forEach(card => {
         card.addEventListener('mousemove', e => {
